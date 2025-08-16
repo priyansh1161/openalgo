@@ -46,7 +46,8 @@ def dashboard():
     # Check if margin_data is empty (authentication failed)
     if not margin_data:
         logger.error(f"Failed to get margin data for user {login_username} - authentication may have expired")
-        return redirect(url_for('auth.logout'))
+        # upstox have a downtime at night, so we need to check if the broker is upstox 
+        # return redirect(url_for('auth.logout'))
     
     # Check if all values are zero (likely authentication error)
     if (margin_data.get('availablecash') == '0.00' and 
